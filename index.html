@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Whitespectre Carousel</title>
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Whitespectre Carousel</h1>
+    <div class="row img-container">
+      <button class="btn btn-default col-xs-1">Prev</button>
+      <div class="col-xs-10 img-display">
+        <!-- template content -->
+      </div>
+      <button class="btn btn-default col-xs-1">Next</button>
+    </div>
+  </div>
+  <!-- block template -->
+  <script type="text/template" class="block-template">
+    <% _.each(blocks, function(block) { %>
+      <div class="col-xs-3">
+        <img src="<%= block.images[0] %>" alt="" class="img-responsive">
+        <p><%= block.title %></p>
+      </div>
+    <% }); %>
+      
+  </script>
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/underscore/underscore-min.js"></script>
+  <script src="bower_components/backbone/backbone-min.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
