@@ -1,104 +1,92 @@
-// // Backbone Model
-
-// var Blog = Backbone.Model.extend({
-//   defaults: {
-//     author: '',
-//     title: '',
-//     url: ''
-//   }
-// })
-
-// // Backbone Collection
-
-// var Blogs = Backbone.Collection.extend({})
-
-// // New instances
-
-// var blog1 = new Blog({
-//   author: 'Michael',
-//   title: 'Michael\'s Blog',
-//   url: 'http://michaelsblog.com'
-// })
-
-// var blog2 = new Blog({
-//   author: 'John',
-//   title: 'John\'s Blog',
-//   url: 'http://johnsblog.com'
-// })
-
-// var blogs = new Blogs([blog1, blog2])
-
-// Backbone Views
-
-// var BlogView = Backbone.View.extend({
-//   model: new Blog(),
-//   tagName: 'tr',
-//   initialize: function () {
-//     this.template = _.template($('.blogs-list-template').html())
-//   },
-//   render: function () {
-//     this.$el.html(this.template(this.model.toJSON()))
-//     return this
-//   }
-
-// })
+// Backbone model
 
 var Block = Backbone.Model.extend({
   defaults: {
-    title: '',
-    images: []
+    title: 'No image found',
+    images: ['https://cdn.browshot.com/static/images/not-found.png']
   }
 })
+
+// Backbone Collection
 
 var Blocks = Backbone.Collection.extend({
   url: './data.json'
 })
 
+// Backbone View
+
 var ImgContainerView = Backbone.View.extend({
-  model: Block,
-  el: $('.img-display'),
-  // initialize: function () {
-  //   this.model.on('add', this.render, this)
-  // },
+  model: new Blocks(),
+
+  el: $('.carousel'),
+
   initialize: function () {
     this.template = _.template($('.block-template').html())
+    // this.btnNext = $('.btn-next')
+    // this.model.view = this
+    // this.model.bind('validated', this.validated)
   },
-  render: function () {
+
+  indexRef: 0,
+
+  events: {
+    'click .btn-next': 'nextBlocks',
+    'click .btn-prev': 'prevBlocks'
+  },
+
+  // validated: function () {
+  //   if ((this.indexRef + 4) >= this.model.length) {
+  //     this.view.btnNext.attr('disabled', 'true')
+  //     console.log(this.indexRef)
+  //     console.log(this.model.length)
+  //   } else {
+  //     this.view.btnNext.attr('disabled', 'false')
+  //   }
+  // },
+
+  nextBlocks: function () {
+    this.indexRef = this.indexRef + 4
+    // this.render(this.indexRef)
+
+    if ((this.indexRef + 4) >= this.model.length) {
+      this.render(this.indexRef)
+      this.$('.btn-next').addClass('disabled')
+      console.log(this.$('.btn-next'))
+      console.log(this.indexRef)
+      console.log(this.model.length)
+    }
+
+    // this.validated()
+  },
+
+  prevBlocks: function () {
+    this.indexRef = this.indexRef - 4
+    this.render(this.indexRef)
+    console.log(this.indexRef)
+  },
+
+  checkNextBtn: function () {
+    if ((this.indexRef + 4) >= this.model.length) {
+      this.$el.find('.btn-next').prop('disabled', true)
+      console.log(this.$el.find('.btn-next')[0])
+      console.log(this.indexRef)
+      console.log(this.model.length)
+    }
+  },
+
+  render: function (index) {
     var self = this
-    var blocks = new Blocks()
-    blocks.fetch({
+    this.model.fetch({
       success: function (blocks) {
-        self.$el.html(self.template({blocks: blocks.toJSON()}))
-        console.log(blocks.toJSON())
+        self.$el.html(self.template({
+          blocks: blocks.toJSON().slice(0 + index, 4 + index)
+        }))
+        // console.log(blocks.toJSON().slice(0 + index, 4 + index))
       }
     })
-    // console.log(images.toJSON())
-    // this.$el.html(this.template)
-    // _.each(this.model.toArray(), function (blog) {
-    //   self.$el.append((new BlogView({model: blog})).render().$el)
-    // })
-    // return this
   }
 })
 
 var imgContainerView = new ImgContainerView()
 
-imgContainerView.render()
-
-// var blogsView = new BlogsView()
-
-// $(document).ready(function () {
-//   $('.add-blog').on('click', function () {
-//     var blog = new Blog({
-//       author: $('.author-input').val(),
-//       title: $('.title-input').val(),
-//       url: $('.url-input').val()
-//     })
-//     $('.author-input').val('')
-//     $('.title-input').val('')
-//     $('.url-input').val('')
-
-//     blogs.add(blog)
-//   })
-// })
-
+imgContainerView.render(0)

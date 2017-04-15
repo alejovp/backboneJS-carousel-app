@@ -9,23 +9,22 @@
 <body>
   <div class="container">
     <h1>Whitespectre Carousel</h1>
-    <div class="row img-container">
-      <button class="btn btn-default col-xs-1">Prev</button>
-      <div class="col-xs-10 img-display">
-        <!-- template content -->
-      </div>
-      <button class="btn btn-default col-xs-1">Next</button>
+    <div class="row carousel">
+      <!-- template content -->
     </div>
   </div>
   <!-- block template -->
   <script type="text/template" class="block-template">
-    <% _.each(blocks, function(block) { %>
-      <div class="col-xs-3">
-        <img src="<%= block.images[0] %>" alt="" class="img-responsive">
-        <p><%= block.title %></p>
-      </div>
-    <% }); %>
-      
+    <button class="btn btn-default col-xs-1 btn-prev">Prev</button>
+    <div class="col-xs-10 img-display">
+      <% _.each(blocks, function(block) { %>
+        <div class="col-xs-3">
+          <img src="<%= block.images[0] %>" alt="" class="img-responsive">
+          <p><%= block.title %></p>
+        </div>
+      <% }); %>   
+    </div>
+    <button class="btn btn-default col-xs-1 btn-next">Next</button>    
   </script>
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
   <script src="bower_components/underscore/underscore-min.js"></script>
