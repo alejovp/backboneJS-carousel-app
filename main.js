@@ -22,9 +22,6 @@ var ImgContainerView = Backbone.View.extend({
 
   initialize: function () {
     this.template = _.template($('.block-template').html())
-    // this.btnNext = $('.btn-next')
-    // this.model.view = this
-    // this.model.bind('validated', this.validated)
   },
 
   indexRef: 0,
@@ -34,54 +31,35 @@ var ImgContainerView = Backbone.View.extend({
     'click .btn-prev': 'prevBlocks'
   },
 
-  // validated: function () {
-  //   if ((this.indexRef + 4) >= this.model.length) {
-  //     this.view.btnNext.attr('disabled', 'true')
-  //     console.log(this.indexRef)
-  //     console.log(this.model.length)
-  //   } else {
-  //     this.view.btnNext.attr('disabled', 'false')
-  //   }
-  // },
-
   nextBlocks: function () {
     this.indexRef = this.indexRef + 4
-    // this.render(this.indexRef)
-
-    if ((this.indexRef + 4) >= this.model.length) {
-      this.render(this.indexRef)
-      this.$('.btn-next').addClass('disabled')
-      console.log(this.$('.btn-next'))
-      console.log(this.indexRef)
-      console.log(this.model.length)
-    }
-
-    // this.validated()
+    this.render(this.indexRef)
   },
 
   prevBlocks: function () {
     this.indexRef = this.indexRef - 4
     this.render(this.indexRef)
-    console.log(this.indexRef)
   },
 
-  checkNextBtn: function () {
-    if ((this.indexRef + 4) >= this.model.length) {
-      this.$el.find('.btn-next').prop('disabled', true)
-      console.log(this.$el.find('.btn-next')[0])
-      console.log(this.indexRef)
-      console.log(this.model.length)
+  checkButtons: function () {
+    if (this.indexRef === 0) {
+      this.$('.btn-prev').prop('disabled', true)
+    } else if ((this.indexRef + 4) >= this.model.length) {
+      this.$('.btn-next').prop('disabled', true)
+      // console.log(this.$el.find('.btn-next')[0])
+      // console.log(this.indexRef)
+      // console.log(this.model.length)
     }
   },
 
-  render: function (index) {
+  render: function (carouselIndex) {
     var self = this
     this.model.fetch({
       success: function (blocks) {
         self.$el.html(self.template({
-          blocks: blocks.toJSON().slice(0 + index, 4 + index)
+          blocks: blocks.toJSON().slice(0 + carouselIndex, 4 + carouselIndex)
         }))
-        // console.log(blocks.toJSON().slice(0 + index, 4 + index))
+        self.checkButtons()
       }
     })
   }
