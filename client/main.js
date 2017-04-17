@@ -1,11 +1,3 @@
-// Backbone model
-
-var Block = Backbone.Model.extend({
-  defaults: {
-    title: 'No image found',
-    images: ['https://cdn.browshot.com/static/images/not-found.png']
-  }
-})
 
 // Backbone Collection
 
@@ -16,12 +8,21 @@ var Blocks = Backbone.Collection.extend({
 // Backbone View
 
 var ImgContainerView = Backbone.View.extend({
-  model: new Blocks(),
+  collection: new Blocks(),
 
   el: $('.carousel'),
 
   initialize: function () {
+    var self = this
     this.template = _.template($('.block-template').html())
+    this.collection.fetch({
+      success: function (blocks) {
+        self.$el.html(self.template({
+          blocks: blocks.toJSON().slice(0, 4)
+        }))
+        self.checkButtons()
+      }
+    })
   },
 
   indexRef: 0,
@@ -44,27 +45,17 @@ var ImgContainerView = Backbone.View.extend({
   checkButtons: function () {
     if (this.indexRef === 0) {
       this.$('.btn-prev').prop('disabled', true)
-    } else if ((this.indexRef + 4) >= this.model.length) {
+    } else if ((this.indexRef + 4) >= this.collection.length) {
       this.$('.btn-next').prop('disabled', true)
-      // console.log(this.$el.find('.btn-next')[0])
-      // console.log(this.indexRef)
-      // console.log(this.model.length)
     }
   },
 
   render: function (carouselIndex) {
-    var self = this
-    this.model.fetch({
-      success: function (blocks) {
-        self.$el.html(self.template({
-          blocks: blocks.toJSON().slice(0 + carouselIndex, 4 + carouselIndex)
-        }))
-        self.checkButtons()
-      }
-    })
+    this.$el.html(this.template({
+      blocks: this.collection.toJSON().slice(0 + carouselIndex, 4 + carouselIndex)
+    }))
+    this.checkButtons()
   }
 })
 
 var imgContainerView = new ImgContainerView()
-
-imgContainerView.render(0)
