@@ -1,0 +1,67 @@
+h1 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+span {
+  color: #6BB839;
+  font-size: 20px;
+}
+
+.logo {
+  height: 100px;
+}
+
+.carousel {
+  display: flex;
+  align-items: center;
+}
+
+.btn-cont {
+  display: flex;
+  justify-content: center;
+}
+
+.btn.btn-nav {
+  height: 40px;
+  width: 40px;
+  border: 2px solid #6BB839;
+  border-radius: 50%;
+  background: transparent;
+  padding-left: 0px;
+  padding-right: 0px;
+  outline: none;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.img-display {
+  display: flex;
+  align-items: center;
+  height: 300px;
+  padding: 0px;
+}
+
+.block-cont {
+  padding: 0;
+  margin-right: 15px;
+  margin-left: 15px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.img-responsive {
+  border-top: 2px solid #6BB839;
+  border-right: 2px solid #6BB839;
+  border-left: 2px solid #6BB839;
+}
+
+.title {
+  margin: 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 16px;
+  border-bottom: 2px solid #6BB839;
+  border-right: 2px solid #6BB839;
+  border-left: 2px solid #6BB839;
+}

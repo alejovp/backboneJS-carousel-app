@@ -8,23 +8,31 @@
 </head>
 <body>
   <div class="container">
-    <h1>Whitespectre Carousel</h1>
+    <h1><img src="img/logo.png" alt="" class="logo"> Carousel</h1>
     <div class="row carousel">
       <!-- template content -->
     </div>
   </div>
   <!-- block template -->
   <script type="text/template" class="block-template">
-    <button class="btn btn-default col-xs-1 btn-prev">Prev</button>
+    <div class="col-xs-1 btn-cont">
+      <button class="btn btn-prev btn-nav">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      </button>
+    </div>
     <div class="col-xs-10 img-display">
       <% _.each(blocks, function(block) { %>
-        <div class="col-xs-3">
+        <div class="col-xs-3 block-cont">
           <img src="<%= block.images[_.random(1)] %>" alt="" class="img-responsive">
-          <p><%= block.title %></p>
+          <p class="title"><%= block.title %></p>
         </div>
       <% }); %>   
     </div>
-    <button class="btn btn-default col-xs-1 btn-next">Next</button>    
+    <div class="col-xs-1 btn-cont">
+      <button class="btn btn-next btn-nav">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      </button>
+    </div>    
   </script>
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
   <script src="bower_components/underscore/underscore-min.js"></script>

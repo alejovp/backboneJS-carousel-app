@@ -10,7 +10,7 @@ var Block = Backbone.Model.extend({
 // Backbone Collection
 
 var Blocks = Backbone.Collection.extend({
-  url: './data.json'
+  url: './api'
 })
 
 // Backbone View

@@ -1,0 +1,25 @@
+{
+  "name": "carousel-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "prestart": "npm install && bower install",
+    "dev": "nodemon index",
+    "postinstall": "./node_modules/bower/bin/bower install",
+    "start": "node index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alejovp/backboneJS-carousel-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alejovp/backboneJS-carousel-app/issues"
+  },
+  "homepage": "https://github.com/alejovp/backboneJS-carousel-app#readme",
+  "dependencies": {
+    "express": "^4.15.2"
+  }
+}
