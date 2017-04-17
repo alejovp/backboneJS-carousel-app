@@ -23,7 +23,7 @@
     <div class="col-xs-10 img-display">
       <% _.each(blocks, function(block) { %>
         <div class="col-xs-3 block-cont">
-          <img src="<%= block.images[_.random(1)] %>" alt="" class="img-responsive">
+          <img src="<%= block.images[_.random(block.images.length === 0 ? 0 : block.images.length - 1)] %>" alt="" class="img-responsive">
           <p class="title"><%= block.title %></p>
         </div>
       <% }); %>   
