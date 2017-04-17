@@ -1,6 +1,6 @@
 # Carousel with BackboneJS
 
-![Carousel](client/img/screenshot.png)]()
+![Carousel](client/img/screenshot.png)
 
 ---
 
